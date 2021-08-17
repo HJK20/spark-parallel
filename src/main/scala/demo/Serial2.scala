@@ -21,17 +21,31 @@ object Serial2 {
       println(f"${Thread.currentThread()} cal $x end")
       y
     })
-      .show(1000)
+//      .show(1000)
+//      .count()
+      .coalesce(2)
+      .write.format("com.databricks.spark.csv")
+      .option("header", "true")
+      .mode("overwrite")
+      .save("src/main/resources/file1_out")
+
     println(s"time count: ${System.currentTimeMillis() - time}")
 
-    spark.range(100, 200).map(x => {
+    spark.range(100, 200).repartition(2).map(x => {
       println(f"${Thread.currentThread()} cal $x start")
       Thread.sleep(1000)
       val y = x * x
       println(f"${Thread.currentThread()} cal $x end")
       y
     })
-      .show(1000)
+//      .show(1000)
+      .count()
+//      .coalesce(4)
+//      .write.format("com.databricks.spark.csv")
+//      .option("header", "true")
+//      .mode("overwrite")
+//      .save("src/main/resources/file2_out")
+
     println(s"time count: ${System.currentTimeMillis() - time}")
 
     Thread.sleep(1000000)

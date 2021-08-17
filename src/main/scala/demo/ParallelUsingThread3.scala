@@ -25,7 +25,8 @@ object ParallelUsingThread3 {
         println(f"${Thread.currentThread()} cal $x end")
         y
       })
-        .show(1000)
+//        .show(1000)
+        .count()
       println(s"time count: ${System.currentTimeMillis() - time}")
     })
 
@@ -37,7 +38,8 @@ object ParallelUsingThread3 {
         println(f"${Thread.currentThread()} cal $x end")
         y
       })
-        .show(1000)
+//        .show(1000)
+        .count()
       println(s"time count: ${System.currentTimeMillis() - time}")
     })
 
@@ -49,7 +51,8 @@ object ParallelUsingThread3 {
         println(f"${Thread.currentThread()} cal $x end")
         y
       })
-        .show(1000)
+//        .show(1000)
+        .count()
       println(s"time count: ${System.currentTimeMillis() - time}")
     })
 
@@ -62,7 +65,8 @@ object ParallelUsingThread3 {
       println(f"${Thread.currentThread()} cal $x end")
       y
     })
-      .show(1000)
+//      .show(1000)
+      .count()
     println(s"time count: ${System.currentTimeMillis() - time}")
 
     Thread.sleep(1000000)

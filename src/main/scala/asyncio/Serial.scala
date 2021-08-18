@@ -1,4 +1,4 @@
-package demo
+package asyncio
 
 import org.apache.spark.sql.SparkSession
 
@@ -9,23 +9,20 @@ object Serial {
       .master("local[4]")
       .getOrCreate()
 
-    val test_file = spark.read
+    val file = spark.read
       .option("header", value = true)
       .option("inferSchema", value = true)
-      .csv("src/main/resources/file1.csv")
+      .csv("src/main/resources/1.csv")
       .cache()
 
-    test_file.coalesce(1)
+    file
       .write.format("com.databricks.spark.csv")
       .option("header", "true")
       .mode("overwrite")
       .save("src/main/resources/file1_out")
 
-    test_file.show()
-    test_file.select("name", "age").show()
-
-    //    println(test_file.count())
-    //    println(test_file.rdd.getNumPartitions)
+//    println(file.count())
+    file.crossJoin(file.limit(1000)).count()
 
     Thread.sleep(1000000)
   }

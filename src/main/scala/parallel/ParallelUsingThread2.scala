@@ -1,4 +1,4 @@
-package demo
+package parallel
 
 import org.apache.spark.sql.SparkSession
 
@@ -19,7 +19,7 @@ object ParallelUsingThread2 {
     //开一个线程提交job，并不意味着这个job只会用一个线程。在实际运行中可能会使用多个线程
     val jobExecutor = Executors.newFixedThreadPool(1)
     jobExecutor.execute(() => {
-      spark.range(101, 200).repartition(2).map(x => {
+      spark.range(101, 200).map(x => {
         println(f"${Thread.currentThread()} cal $x start")
         Thread.sleep(1000)
         val y = x * x
@@ -47,7 +47,7 @@ object ParallelUsingThread2 {
     })
 //      .show(1000)
 //      .count()
-      .coalesce(2)
+//      .coalesce(2)
       .write.format("com.databricks.spark.csv")
       .option("header", "true")
       .mode("overwrite")

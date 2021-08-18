@@ -1,4 +1,4 @@
-package demo
+package parallel
 
 import org.apache.spark.sql.SparkSession
 

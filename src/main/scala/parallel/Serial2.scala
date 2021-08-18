@@ -1,4 +1,4 @@
-package demo
+package parallel
 
 import org.apache.spark.sql.SparkSession
 
@@ -23,7 +23,7 @@ object Serial2 {
     })
 //      .show(1000)
 //      .count()
-      .coalesce(2)
+//      .coalesce(2)
       .write.format("com.databricks.spark.csv")
       .option("header", "true")
       .mode("overwrite")
